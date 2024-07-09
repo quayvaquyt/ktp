@@ -1,0 +1,12 @@
+[Unit]
+Description=gunicorn daemon for ktp
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/usr/www/ktp
+ExecStart=/usr/www/ktp/venv/bin/gunicorn --access-logfile - --workers 10 --bind 127.0.0.1:8000 ktp.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
